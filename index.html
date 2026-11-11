@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MINHAJ GAMING | Game Store</title>
+<meta name="description" content="MINHAJ GAMING - Discover and download exciting games.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background:#080b14;color:#fff;
+ font-family:Arial,sans-serif;
+}
+header{
+ background:#101728;padding:18px 6%;
+ display:flex;justify-content:space-between;
+ align-items:center;flex-wrap:wrap;gap:15px;
+ border-bottom:1px solid #26334b;
+}
+.logo{font-size:25px;font-weight:bold;color:#00f5a0}
+.logo span{color:white}
+nav a{
+ color:#ddd;text-decoration:none;
+ margin:8px;font-size:14px;
+}
+nav a:hover{color:#00f5a0}
+.hero{
+ padding:65px 20px;text-align:center;
+ background:linear-gradient(135deg,#102b40,#251344,#07121d);
+}
+.hero h1{font-size:38px;margin-bottom:15px}
+.hero h1 span{color:#00f5a0}
+.hero p{color:#c3cbd8;line-height:1.7}
+.search{
+ margin:25px auto 0;max-width:450px;
+ display:flex;gap:8px;
+}
+.search input{
+ flex:1;min-width:0;padding:13px;
+ border:0;border-radius:8px;
+}
+.search button,.download{
+ background:#00e69a;color:#07130e;
+ border:0;padding:12px 18px;
+ border-radius:7px;font-weight:bold;
+ cursor:pointer;text-decoration:none;
+}
+.container{padding:35px 6%}
+.section-title{
+ font-size:23px;margin-bottom:20px;
+}
+.categories{
+ display:flex;gap:10px;flex-wrap:wrap;
+ margin-bottom:25px;
+}
+.categories button{
+ padding:10px 17px;border:1px solid #263b55;
+ background:#111c30;color:white;
+ border-radius:20px;cursor:pointer;
+}
+.categories button:hover{
+ background:#00e69a;color:#06130e;
+}
+.games{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+ gap:20px;
+}
+.game{
+ background:#111a2b;border:1px solid #24344d;
+ border-radius:13px;overflow:hidden;
+ transition:.2s;
+}
+.game:hover{transform:translateY(-5px);border-color:#00e69a}
+.game img{
+ width:100%;height:145px;object-fit:cover;
+ background:#202a3a;
+}
+.info{padding:15px}
+.info h3{margin-bottom:8px}
+.info p{font-size:13px;color:#aab6c8;line-height:1.5}
+.info .download{
+ display:inline-block;margin-top:14px;
+ font-size:13px;
+}
+.tag{
+ color:#00e69a;font-size:12px;
+ margin-bottom:8px;display:block;
+}
+footer{
+ background:#101728;text-align:center;
+ padding:30px 15px;color:#9ba8bb;
+ line-height:2;
+}
+footer strong{color:#00e69a}
+@media(max-width:600px){
+ .hero h1{font-size:29px}
+ header{justify-content:center}
+ nav{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+ <div class="logo">MINHAJ <span>GAMING</span></div>
+ <nav>
+  <a href="#home">Home</a>
+  <a href="#games">Games</a>
+  <a href="#categories">Categories</a>
+  <a href="#about">About</a>
+ </nav>
+</header>
+
+<section class="hero" id="home">
+ <h1>WELCOME TO <span>MINHAJ GAMING</span></h1>
+ <p>Discover Amazing Games. Play More. Enjoy More!<br>
+ Your Ultimate Gaming Destination.</p>
+ <div class="search">
+  <input id="search" placeholder="Search your favorite game...">
+  <button onclick="searchGames()">Search</button>
+ </div>
+</section>
+
+<main class="container" id="games">
+ <h2 class="section-title">🎮 Explore Games</h2>
+
+ <div class="categories" id="categories">
+  <button onclick="filterGames('All')">All Games</button>
+  <button onclick="filterGames('Football')">Football</button>
+  <button onclick="filterGames('Racing')">Racing</button>
+  <button onclick="filterGames('Action')">Action</button>
+  <button onclick="filterGames('Adventure')">Adventure</button>
+  <button onclick="filterGames('Open World')">Open World</button>
+  <button onclick="filterGames('Offline')">Offline</button>
+  <button onclick="filterGames('Puzzle')">Puzzle</button>
+  <button onclick="filterGames('My Games')">My Games</button>
+ </div>
+
+ <div class="games" id="gameList"></div>
+</main>
+
+<footer id="about">
+ <strong>MINHAJ GAMING</strong>
+ <p>Your Gaming World, One Platform.</p>
+ <p>© 2026 MINHAJ GAMING. All Rights Reserved.</p>
+</footer>
+
+<script>
+const games=[
+ {
+  name:"My Football Game",
+  category:"Football",
+  description:"Enjoy exciting football gameplay.",
+  image:"https://placehold.co/600x350/102b40/00f5a0?text=Football",
+  link:"",
+  tag:"Football"
+ },
+ {
+  name:"Racing Adventure",
+  category:"Racing",
+  description:"Experience an exciting racing adventure.",
+  image:"https://placehold.co/600x350/202040/ffffff?text=Racing",
+  link:"",
+  tag:"Racing"
+ },
+ {
+  name:"Action World",
+  category:"Action",
+  description:"Discover an action-packed game.",
+  image:"https://placehold.co/600x350/401c2a/ffffff?text=Action",
+  link:"",
+  tag:"Action"
+ },
+ {
+  name:"Open World Adventure",
+  category:"Open World",
+  description:"Explore a huge open world.",
+  image:"https://placehold.co/600x350/153c32/ffffff?text=Open+World",
+  link:"",
+  tag:"Open World"
+ },
+ {
+  name:"Offline Puzzle",
+  category:"Puzzle",
+  description:"Enjoy fun puzzle challenges.",
+  image:"https://placehold.co/600x350/30254b/ffffff?text=Puzzle",
+  link:"",
+  tag:"Puzzle"
+ },
+ {
+  name:"My First Game",
+  category:"My Games",
+  description:"A game created for MINHAJ GAMING.",
+  image:"https://placehold.co/600x350/15334b/00f5a0?text=My+Game",
+  link:"",
+  tag:"My Games"
+ }
+];
+
+function showGames(category="All",keyword=""){
+ const list=document.getElementById("gameList");
+ list.innerHTML="";
+ const filtered=games.filter(g=>
+  (category==="All" || g.category===category ||
+   (category==="Offline" && g.category==="Offline")) &&
+  g.name.toLowerCase().includes(keyword.toLowerCase())
+ );
+ if(filtered.length===0){
+  list.innerHTML="<p>No games found.</p>";
+  return;
+ }
+ filtered.forEach(g=>{
+  list.innerHTML+=`
+  <article class="game">
+   <img src="${g.image}" alt="${g.name}" loading="lazy">
+   <div class="info">
+    <span class="tag">${g.tag}</span>
+    <h3>${g.name}</h3>
+    <p>${g.description}</p>
+    <a class="download"
+    href="${g.link || '#'}"
+    ${g.link?'target="_blank" rel="noopener"':'onclick="alert(\\'এই গেমের ডাউনলোড লিংক এখনো যোগ করা হয়নি।\\');return false;"'}>
+    Download Game
+    </a>
+   </div>
+  </article>`;
+ });
+}
+
+function filterGames(category){
+ document.getElementById("search").value="";
+ showGames(category);
+}
+function searchGames(){
+ showGames("All",document.getElementById("search").value);
+}
+document.getElementById("search").addEventListener("input",e=>{
+ showGames("All",e.target.value);
+});
+showGames();
+</script>
+
+</body>
+</html>
